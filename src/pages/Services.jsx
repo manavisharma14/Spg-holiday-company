@@ -1,83 +1,113 @@
-import React from 'react';
+"use client"; // Ensure this is at the top in Next.js
 
-function Services({ id }) {
-  const servicesData = [
-    {
-      title: 'International Air Tickets',
-      description:
-        'We provide flight bookings to major international destinations at the best possible fares.',
-    },
-    {
-      title: 'Domestic Air Tickets',
-      description:
-        'Plan your trips within India with convenient and affordable domestic flights.',
-    },
-    {
-      title: 'Hotel Booking & Visa',
-      description:
-        'Seamless hotel bookings at top destinations and assistance with visa documentation.',
-    },
-    {
-      title: 'Passport & Tour Packages',
-      description:
-        'From passport guidance to full tour packages, we handle it all.',
-    },
-    {
-      title: 'Eurail Pass',
-      description:
-        'Travel across Europe with a single pass—we’ll help you set it up.',
-    },
-    {
-      title: 'Travel Insurance',
-      description:
-        'Get peace of mind with our comprehensive travel insurance plans.',
-    },
-    {
-      title: 'Forex Money Ex-changer',
-      description:
-        'Manage currency exchange effortlessly with our forex services.',
-    },
-  ];
+import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Keyboard, Mousewheel } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
+// ✅ Correct Image Imports
+import image1 from "../images/1.png";
+import image2 from "../images/2.png";
+import image3 from "../images/3.png";
+import image4 from "../images/4.png";
+import image5 from "../images/5.png";
+import image6 from "../images/6.png";
+
+const services = [
+  {
+    title: "International and Domestic Air Tickets",
+    description: "We provide flight bookings to major international destinations and trips within India at the best possible fares.",
+    image: image1,
+  },
+  {
+    title: "Hotel Booking & Visa",
+    description: "Seamless hotel bookings at top destinations and assistance with visa documentation.",
+    image: image2,
+  },
+  {
+    title: "Passport & Tour Packages",
+    description: "From passport guidance to full tour packages, we handle it all.",
+    image: image3,
+  },
+  {
+    title: "Eurail Pass",
+    description: "Travel across Europe with a single pass—we’ll help you set it up.",
+    image: image4,
+  },
+  {
+    title: "Travel Insurance",
+    description: "Get peace of mind with our comprehensive travel insurance plans.",
+    image: image5,
+  },
+  {
+    title: "Forex Money Ex-changer",
+    description: "Manage currency exchange effortlessly with our forex services.",
+    image: image6,
+  },
+];
+
+function Projects({ id }) {
   return (
-    <section id={id} className="py-16 px-4 bg-[#EAE7DD]">
-      <div className="max-w-6xl mx-auto">
-        {/* Section Heading */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-800">Our Services</h2>
-          <p className="mt-2 text-gray-600 max-w-xl mx-auto">
-            Explore our range of offerings designed to make your travel seamless and unforgettable.
-          </p>
-        </div>
+    <div className="py-16 px-6 md:px-24 bg-white text-gray-900">
+      {/* Section Title */}
+      <h1 className="text-5xl font-bold text-center">Our Services</h1>
+  
+      {/* Swiper Carousel */}
+      <div className="mt-12 max-w-4xl mx-auto relative overflow-hidden">
+        <Swiper
+          modules={[Navigation, Pagination, Keyboard, Mousewheel]}
+          slidesPerView={1} // ✅ Ensures full slide per swipe
+          spaceBetween={0} // ✅ No extra spacing
+          navigation={{
+            nextEl: ".custom-swiper-next",
+            prevEl: ".custom-swiper-prev",
+          }}
+          pagination={{ clickable: true }}
+          keyboard={{ enabled: true, onlyInViewport: true }}
+          mousewheel={{
+            forceToAxis: true,
+            sensitivity: 2, // ✅ Smooth scrolling
+            releaseOnEdges: true, // ✅ Enables smooth transitions
+          }}
+          speed={500} // ✅ Smooth transitions
+          className="pb-10"
+        >
+          {services.map((service, index) => (
+            <SwiperSlide key={index}>
+              <div className="w-full max-w-2xl mx-auto text-center"> 
+                {/* ✅ Smaller Image Size with Fixed Width & Height */}
+                <img 
+                  src={service.image} 
+                  alt={service.title} 
+                  className="w-[70%] md:w-[60%] h-auto max-h-72 mx-auto object-contain rounded-lg shadow-lg"
+                />
 
-        {/* First Row (4 Boxes) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-25">
-          {servicesData.slice(0, 4).map((service, index) => (
-            <div
-              key={index}
-              className="bg-white  shadow transition transform hover:-translate-y-2 hover:scale-105 hover:shadow-2xl hover:bg-gray-100 w-64 h-64 flex flex-col justify-between p-6 text-center mx-auto"
-            >
-              <h3 className="text-xl font-semibold text-gray-800">{service.title}</h3>
-              <p className="text-gray-600 text-sm">{service.description}</p>
-            </div>
+                {/* ✅ Ensure Text is Centered */}
+                <div className="p-6 text-center">
+                  <h2 className="text-2xl font-semibold">{service.title}</h2>
+                  <p className="text-gray-600 mt-2 text-lg">{service.description}</p>
+                </div>
+              </div>
+            </SwiperSlide>
           ))}
-        </div>
+        </Swiper>
 
-        {/* Second Row (3 Boxes, Center-Aligned) */}
-        <div className="flex justify-center gap-8 mt-12">
-          {servicesData.slice(4).map((service, index) => (
-            <div
-              key={index}
-              className="bg-white  shadow transition transform hover:-translate-y-2 hover:scale-105 hover:shadow-2xl hover:bg-gray-100 w-64 h-64 flex flex-col justify-between p-6 text-center"
-            >
-              <h3 className="text-xl font-semibold text-gray-800">{service.title}</h3>
-              <p className="text-gray-600 text-sm">{service.description}</p>
-            </div>
-          ))}
+        {/* Custom Black Navigation Arrows */}
+        <div className="absolute top-1/2 left-4 transform -translate-y-1/2 z-10">
+          <button className="custom-swiper-prev text-black text-4xl font-bold px-4 transition hover:scale-110 ease-in-out">
+            &#10094;
+          </button>
+        </div>
+        <div className="absolute top-1/2 right-4 transform -translate-y-1/2 z-10">
+          <button className="custom-swiper-next text-black text-4xl font-bold px-4 transition hover:scale-110 ease-in-out">
+            &#10095;
+          </button>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 
-export default Services;
+export default Projects;

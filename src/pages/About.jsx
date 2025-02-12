@@ -5,7 +5,7 @@ function About({ id }) {
   return (
     <section
       id={id}
-      className="bg-[#EAE7DD] relative min-h-screen flex items-center justify-center px-8 "
+      className="bg-white relative min-h-screen flex items-center justify-center px-8 "
     >
       {/* Content Section */}
       <div className="relative z-10 flex flex-col md:flex-row items-center max-w-6xl w-full gap-8">

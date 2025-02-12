@@ -1,5 +1,6 @@
-import React from 'react';
-import backgroundImage from './img.jpg'; // Adjust the path if your image is in a subfolder
+import React from "react";
+import { TypeAnimation } from "react-type-animation"; // Typing effect library
+import backgroundImage from "./img.jpg"; // Adjust path if needed
 
 function Home({ id }) {
   return (
@@ -19,17 +20,31 @@ function Home({ id }) {
         backgroundImage: `url(${backgroundImage})`,
       }}
     >
+      {/* Dark Overlay for Better Readability */}
       <div
         className="absolute inset-0"
         style={{
-          backgroundColor: 'rgba(0, 0, 0, 0.6)', // Adjust opacity here (0.3 for 30%)
+          backgroundColor: "rgba(0, 0, 0, 0.6)", // Adjust opacity (0.6 for 60%)
         }}
       ></div>
 
       {/* Main content container */}
       <div className="text-center max-w-2xl text-white relative z-10">
+        {/* ✅ Typing Animation */}
         <h1 className="text-5xl md:text-7xl font-extrabold mb-6 drop-shadow-md">
-          The only way to travel!
+          <TypeAnimation
+            sequence={[
+              "The only way to travel!", // Text to type
+              2000, // Pause for 2 seconds
+              "", // Erase text
+              500, // Pause for 0.5 seconds
+              "The only way to travel!", // Retype text
+              2000, // Pause for 2 seconds
+            ]}
+            speed={100} // Typing speed
+            deletionSpeed={80} // Erasing speed
+            repeat={Infinity} // Infinite loop
+          />
         </h1>
 
         <p className="text-lg md:text-2xl mb-4 drop-shadow-md">
